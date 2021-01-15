@@ -38,7 +38,8 @@ if ($opcao == "selecione") {
     $resposta = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
     if ($resposta != 200) {
-        echo "<div class='col-12 alert alert-danger'> <strong>Código pode estar incorreto ou não existe no site da Gazin Atacado</strong><br/>{$resposta} - Caso o erro perssista contate o administrador do sistema</div>";
+        echo "<div class='col-12 alert alert-danger'> <strong>Código pode estar incorreto ou não existe no
+	site da Gazin Atacado</strong><br/>{$resposta} - Caso o erro perssista contate o administrador do sistema</div>";
     } else {
         // Faremos o PHP interpretar e reconhecer o JSON que
         //recebemos da API.
@@ -85,14 +86,15 @@ if ($opcao == "selecione") {
             fwrite($fp, $xml);
             fclose($fp);
 			//Importação será feita no painel wordpress com wp-import
-            echo "<div class='col-12 alert alert-success'> <strong>XML GERADO COM SUCESSO</strong><br/>Arquivo XML (<a target='_blank' href='https://lojasgerry.com.br/import-gazin/XML/produtosGazin.xml'>produtosGazin.xml</a>) está pronto para ser importado"
+            echo "<div class='col-12 alert alert-success'> <strong>XML GERADO COM SUCESSO</strong><br/>Arquivo XML
+	    (<a target='_blank' href='https://lojasgerry.com.br/import-gazin/XML/produtosGazin.xml'>produtosGazin.xml</a>) está pronto para ser importado"
             . " "
             . "<br/><a href='https://seusitewordpress/wp-admin/admin.php?page=pmxi-admin-manage'>Ir para área de importação</a>"
             . "</div>";
         } elseif($opcao == "upprod" || $opcao =="upprodcodigo") {
             $quantProd = count($encoded);
             if($quantProd != 0){
-            //Criando XML para atualização do preços
+            //Criando XML para atualização do preços e estoque
             $xml = '<?xml version="1.0" encoding="UTF-8"?>';
             $xml .= '<listaPreco>';
             $cont = 0;
@@ -110,12 +112,14 @@ if ($opcao == "selecione") {
             fwrite($fp, $xml);
             fclose($fp);
             echo "<div class='col-12 alert alert-success'> <strong>XML GERADO COM SUCESSO</strong><br/>"
-            . "Arquivo XML (<a href='https://seusitewordpress.com.br/import-gazin/XML/PrecosGazin.xml' target='_blank'>AtualizarPrecosGazin.xml</a>) está pronto para ser importado"
+            . "Arquivo XML (<a href='https://seusitewordpress.com.br/import-gazin/XML/PrecosGazin.xml' target='_blank'>AtualizarPrecosGazin.xml</a>)
+	    está pronto para ser importado"
             . " "
             . "<br/><a href='https://seusitewordpress.com.br/wp-admin/admin.php?page=pmxi-admin-manage'>Ir para área de importação</a>"
             . "</div>";
             }else{
-                echo "<div class='col-12 alert alert-danger'> <strong>Não é possivel Recuperar Preço e Quantidade deste produto</strong><br/>Talvez voce não tenha permissões da Gazin para visualizar esses dados</div>";
+                echo "<div class='col-12 alert alert-danger'> <strong>Não é possivel Recuperar Preço e 
+		Quantidade deste produto</strong><br/>Talvez voce não tenha permissões da Gazin para visualizar esses dados</div>";
             }
              
         }
